@@ -23,5 +23,68 @@ const createNumberContainer = () => {
     document.body.appendChild(numberContainer);
 
     console.log("Contenitore dei numeri aggiunto alla pagina");
+
     return numberContainer;
 };
+
+const numberContainer = createNumberContainer();
+
+// Timer di 30 secondi
+const startTimer = () => {
+    console.log("Timer avviato");
+    setTimeout(() => {
+
+        console.log("Timer scaduto, rimozione dei numeri");
+
+        numberContainer.remove();
+        createInputForm();
+    }, 30000); // 30 secondi
+};
+
+// Crea 5 input per l'utente
+const createInputForm = () => {
+
+    console.log("Creazione del form di input");
+
+    const inputForm = document.createElement('form');
+    inputForm.innerHTML = `
+        <h2>Inserisci i numeri che ricordi:</h2>
+        ${Array.from({ length: 5 }, (_, i) => `<input type="number" id="number${i + 1}" required>`).join('')}
+        <button type="submit">Verifica</button>
+    `;
+    document.body.appendChild(inputForm);
+    inputForm.addEventListener('submit', handleFormSubmission);
+};
+
+// Gestisci la sottomissione del form
+const handleFormSubmission = (e) => {
+    e.preventDefault();
+
+    console.log("Form inviato");
+
+    const enteredNumbers = Array.from({ length: 5 }, (_, i) => parseInt(document.getElementById(`number${i + 1}`).value, 10));
+
+    console.log("Numeri inseriti dall'utente:", enteredNumbers);
+
+    const correctNumbers = enteredNumbers.filter(num => randomNumbers.includes(num));
+
+    console.log("Numeri corretti:", correctNumbers);
+
+    displayResult(correctNumbers);
+};
+
+// Mostra il risultato
+const displayResult = (correctNumbers) => {
+    const resultContainer = document.createElement('div');
+    resultContainer.id = 'result';
+    resultContainer.innerHTML = `
+        <h3>Risultato:</h3>
+        <p>Hai indovinato ${correctNumbers.length} numeri: ${correctNumbers.join(', ')}</p>
+    `;
+    document.body.appendChild(resultContainer);
+
+    console.log("Risultato mostrato all'utente");
+};
+
+// Avvia il gioco
+startTimer();
