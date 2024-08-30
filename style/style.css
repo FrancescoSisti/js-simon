@@ -118,6 +118,31 @@ button[type="submit"]:hover {
     }
 }
 
+/* Stili per il risultato */
+#result {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#result h3 {
+    color: #1a1a2e;
+    margin-bottom: 10px;
+}
+
+#result p {
+    font-size: 18px;
+    color: #333;
+}
+
+/* Stile per l'animazione di uscita */
+.fadeOut {
+    animation: fadeOut 0.5s ease-in-out;
+}
+
 footer {
     background-color: #1a1a2e;
     color: #e0e0e0;
